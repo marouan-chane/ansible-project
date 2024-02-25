@@ -1,2 +1,1 @@
----
-# defaults file for apache
+path_apache2: "/etc/apache2/.htpasswd"

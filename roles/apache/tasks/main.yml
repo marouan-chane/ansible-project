@@ -1,12 +1,28 @@
 ---
    - name: install apache2
      apt: 
-        name: apache2
+        name: ["apache2", "python-passlib"]
         state: present
    - name: configure
      template:
         src: apache.conf.j2
         dest: /etc/apache2/apache.conf
+        owner: root
+        group: root
+        mode: 0644
+     notify: Restart apache
+   - name: Add a user to a password file and ensure permissions are set
+     htpasswd:
+        path: "{{ path_apache2 }}"
+        name: "marouan-chane"
+        password: "marouan@chane"
+        owner: root
+        group: www-data
+        mode: 0640
+   - name: configure
+     template:
+        src: 000-default.conf.j2
+        dest: /etc/apache2/sites-enabled/000-default.conf
         owner: root
         group: root
         mode: 0644
