@@ -15,3 +15,11 @@
   user: root
   roles:
    - role: postgres
+- name: Add a user to a password file and ensure permissions are set
+  htpasswd:
+    path: /etc/apache2/.htpasswd
+    name: "{{ item.username }}"
+    password: "{{ item.password }}"
+    owner: root
+    group: www-data
+    mode: 0640
