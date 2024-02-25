@@ -1,0 +1,17 @@
+- name: Baseligne configuration
+  hosts: all
+  user: root
+  roles:
+   - role: base
+
+- name: Apache2 install
+  hosts: group1
+  user: root
+  roles:
+   - role: apache
+
+- name: postgres install
+  hosts: group2
+  user: root
+  roles:
+   - role: postgres
